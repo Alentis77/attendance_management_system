@@ -12,7 +12,7 @@ export default async function ReportsPage() {
         <div>
             <h1 className="text-2xl font-bold mb-6 text-gray-900">Attendance Reports</h1>
 
-            <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+            <div className="bg-white shadow overflow-x-auto sm:rounded-lg">
                 <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50">
                         <tr>

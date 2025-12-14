@@ -24,7 +24,7 @@ export default async function ReportDetailsPage({ params }: { params: Promise<{ 
                 </Link>
             </div>
 
-            <div className="bg-white shadow overflow-hidden sm:rounded-lg mb-8">
+            <div className="bg-white shadow overflow-x-auto sm:rounded-lg mb-8">
                 <div className="px-4 py-5 sm:px-6">
                     <h3 className="text-lg leading-6 font-medium text-gray-900">Session Details</h3>
                     <p className="mt-1 max-w-2xl text-sm text-gray-500">Attendance information for this session.</p>
@@ -54,7 +54,7 @@ export default async function ReportDetailsPage({ params }: { params: Promise<{ 
             </div>
 
             <h3 className="text-lg font-medium text-gray-900 mb-4">Student Records</h3>
-            <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+            <div className="bg-white shadow overflow-x-auto sm:rounded-lg">
                 <table className="min-w-full divide-y divide-gray-200">
                     <thead className="bg-gray-50">
                         <tr>

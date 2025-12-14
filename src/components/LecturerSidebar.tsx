@@ -6,10 +6,13 @@ import {
     LayoutDashboard,
     ClipboardCheck,
     FileText,
-    LogOut
+    LogOut,
+    Menu,
+    X
 } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import clsx from 'clsx';
+import { useState } from 'react';
 
 const navigation = [
     { name: 'Dashboard', href: '/lecturer/dashboard', icon: LayoutDashboard },
@@ -17,21 +20,22 @@ const navigation = [
     { name: 'Reports', href: '/lecturer/reports', icon: FileText },
 ];
 
-export default function LecturerSidebar() {
+function SidebarContent({ onClose }: { onClose?: () => void }) {
     const pathname = usePathname();
 
     return (
-        <div className="flex w-64 flex-col bg-emerald-700 text-white">
+        <div className="flex h-full flex-col bg-emerald-700 text-white">
             <div className="flex h-16 items-center justify-center bg-emerald-800 text-xl font-bold">
                 Lecturer Portal
             </div>
-            <nav className="flex-1 space-y-1 px-2 py-4">
+            <nav className="flex-1 space-y-1 px-2 py-4 overflow-y-auto">
                 {navigation.map((item) => {
                     const isActive = pathname.startsWith(item.href);
                     return (
                         <Link
                             key={item.name}
                             href={item.href}
+                            onClick={onClose}
                             className={clsx(
                                 isActive
                                     ? 'bg-emerald-800 text-white'
@@ -64,5 +68,39 @@ export default function LecturerSidebar() {
                 </button>
             </div>
         </div>
+    );
+}
+
+export default function LecturerSidebar() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+        <>
+            {/* Mobile Header */}
+            <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-emerald-800 flex items-center justify-between px-4 z-40 shadow-md">
+                <div className="text-white font-bold text-xl">Lecturer Portal</div>
+                <button onClick={() => setIsOpen(!isOpen)} className="text-white p-2">
+                    {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                </button>
+            </div>
+
+            {/* Desktop Sidebar */}
+            <div className="hidden md:flex w-64 flex-col h-full">
+                <SidebarContent />
+            </div>
+
+            {/* Mobile Sidebar Overlay */}
+            {isOpen && (
+                <div className="md:hidden fixed inset-0 z-50 flex">
+                    <div
+                        className="fixed inset-0 bg-black/50 transition-opacity"
+                        onClick={() => setIsOpen(false)}
+                    />
+                    <div className="relative w-64 h-full shadow-xl transform transition-transform">
+                        <SidebarContent onClose={() => setIsOpen(false)} />
+                    </div>
+                </div>
+            )}
+        </>
     );
 }

@@ -114,36 +114,61 @@ export default function AttendanceForm({ years, semesters, faculties }: any) {
                 <div className="mt-8">
                     <h3 className="text-lg font-semibold mb-4">Students List</h3>
                     {loading ? <Loader2 className="animate-spin h-8 w-8 text-indigo-600" /> : (
-                        <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-                            <table className="min-w-full divide-y divide-gray-300">
-                                <thead className="bg-gray-50">
-                                    <tr>
-                                        <th className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name</th>
-                                        <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Index Number</th>
-                                        <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-gray-200 bg-white">
-                                    {students.map((student) => (
-                                        <tr key={student._id}>
-                                            <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{student.name}</td>
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{student.indexNumber}</td>
-                                            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                <label className="inline-flex items-center cursor-pointer">
-                                                    <input
-                                                        type="checkbox"
-                                                        className="form-checkbox h-5 w-5 text-indigo-600 rounded focus:ring-indigo-500"
-                                                        checked={attendance[student._id] || false}
-                                                        onChange={() => toggleAttendance(student._id)}
-                                                    />
-                                                    <span className="ml-2">{attendance[student._id] ? 'Present' : 'Absent'}</span>
-                                                </label>
-                                            </td>
+                        <>
+                            {/* Desktop View - Table */}
+                            <div className="hidden md:block overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+                                <table className="min-w-full divide-y divide-gray-300">
+                                    <thead className="bg-gray-50">
+                                        <tr>
+                                            <th className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">Name</th>
+                                            <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Index Number</th>
+                                            <th className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status</th>
                                         </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
+                                    </thead>
+                                    <tbody className="divide-y divide-gray-200 bg-white">
+                                        {students.map((student) => (
+                                            <tr key={student._id}>
+                                                <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{student.name}</td>
+                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{student.indexNumber}</td>
+                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                    <label className="inline-flex items-center cursor-pointer">
+                                                        <input
+                                                            type="checkbox"
+                                                            className="form-checkbox h-5 w-5 text-indigo-600 rounded focus:ring-indigo-500"
+                                                            checked={attendance[student._id] || false}
+                                                            onChange={() => toggleAttendance(student._id)}
+                                                        />
+                                                        <span className="ml-2">{attendance[student._id] ? 'Present' : 'Absent'}</span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            {/* Mobile View - Cards */}
+                            <div className="md:hidden space-y-4">
+                                {students.map((student) => (
+                                    <div key={student._id} className="bg-white p-4 rounded-lg shadow border border-gray-200 flex items-center justify-between">
+                                        <div>
+                                            <div className="font-medium text-gray-900">{student.name}</div>
+                                            <div className="text-sm text-gray-500">{student.indexNumber}</div>
+                                        </div>
+                                        <label className="relative inline-flex items-center cursor-pointer">
+                                            <input
+                                                type="checkbox"
+                                                className="sr-only peer"
+                                                checked={attendance[student._id] || false}
+                                                onChange={() => toggleAttendance(student._id)}
+                                            />
+                                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600"></div>
+                                            <span className="ml-2 text-sm font-medium text-gray-900">{attendance[student._id] ? 'Present' : 'Absent'}</span>
+                                        </label>
+                                    </div>
+                                ))}
+                            </div>
+                        </>
                     )}
 
                     <div className="mt-6 flex justify-end">
