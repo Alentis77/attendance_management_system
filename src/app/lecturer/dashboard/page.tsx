@@ -4,7 +4,7 @@ import { ClipboardCheck, FileText } from 'lucide-react';
 export default function LecturerDashboard() {
     return (
         <div>
-            <h1 className="text-2xl font-bold mb-6">Lecturer Dashboard</h1>
+            <h1 className="text-2xl font-bold mb-6 text-gray-900">Lecturer Dashboard</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Link href="/lecturer/take-attendance" className="block p-6 bg-white rounded-lg shadow hover:shadow-md transition-shadow">
                     <div className="flex items-center">

@@ -162,3 +162,80 @@ export async function submitAttendance(data: {
     revalidatePath('/lecturer/reports');
     return { success: true, sessionId: newSession._id.toString() };
 }
+
+import { redirect } from 'next/navigation';
+
+// Update Actions
+
+export async function updateAcademicYear(id: string, formData: FormData) {
+    const year = formData.get('year') as string;
+    const isCurrent = formData.get('isCurrent') === 'on';
+
+    await connectDB();
+
+    if (isCurrent) {
+        await AcademicYear.updateMany({}, { isCurrent: false });
+    }
+
+    await AcademicYear.findByIdAndUpdate(id, { year, isCurrent });
+    revalidatePath('/admin/academic-years');
+    redirect('/admin/academic-years');
+}
+
+export async function updateSemester(id: string, formData: FormData) {
+    const name = formData.get('name') as string;
+    const academicYear = formData.get('academicYear') as string;
+
+    await connectDB();
+    await Semester.findByIdAndUpdate(id, { name, academicYear });
+    revalidatePath('/admin/semesters');
+    redirect('/admin/semesters');
+}
+
+export async function updateFaculty(id: string, formData: FormData) {
+    const name = formData.get('name') as string;
+
+    await connectDB();
+    await Faculty.findByIdAndUpdate(id, { name });
+    revalidatePath('/admin/faculties');
+    redirect('/admin/faculties');
+}
+
+export async function updateCourse(id: string, formData: FormData) {
+    const code = formData.get('code') as string;
+    const name = formData.get('name') as string;
+    const faculty = formData.get('faculty') as string;
+    const semester = formData.get('semester') as string;
+
+    await connectDB();
+    await Course.findByIdAndUpdate(id, { code, name, faculty, semester });
+    revalidatePath('/admin/courses');
+    redirect('/admin/courses');
+}
+
+export async function updateStudent(id: string, formData: FormData) {
+    const name = formData.get('name') as string;
+    const indexNumber = formData.get('indexNumber') as string;
+    const faculty = formData.get('faculty') as string;
+
+    await connectDB();
+    await Student.findByIdAndUpdate(id, { name, indexNumber, faculty });
+    revalidatePath('/admin/students');
+    redirect('/admin/students');
+}
+
+export async function updateLecturer(id: string, formData: FormData) {
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+
+    await connectDB();
+    const updateData: any = { name, email };
+    if (password) {
+        updateData.password = await bcrypt.hash(password, 10);
+    }
+
+    await User.findByIdAndUpdate(id, updateData);
+    revalidatePath('/admin/lecturers');
+    redirect('/admin/lecturers');
+}

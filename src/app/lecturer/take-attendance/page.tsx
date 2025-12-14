@@ -2,6 +2,7 @@ import { getAcademicYears, getSemesters, getFaculties } from '@/lib/data';
 import AttendanceForm from './attendance-form';
 
 export default async function TakeAttendancePage() {
+    console.log('Rendering TakeAttendancePage');
     const years = await getAcademicYears();
     const semesters = await getSemesters();
     const faculties = await getFaculties();
@@ -13,7 +14,7 @@ export default async function TakeAttendancePage() {
 
     return (
         <div>
-            <h1 className="text-2xl font-bold mb-6">Take Attendance</h1>
+            <h1 className="text-2xl font-bold mb-6 text-gray-900">Take Attendance</h1>
             <AttendanceForm years={plainYears} semesters={plainSemesters} faculties={plainFaculties} />
         </div>
     );

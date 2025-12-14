@@ -81,28 +81,28 @@ export default function AttendanceForm({ years, semesters, faculties }: any) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Academic Year</label>
-                    <select className="mt-1 block w-full rounded-md border border-gray-300 p-2" value={selectedYear} onChange={e => setSelectedYear(e.target.value)}>
+                    <select className="mt-1 block w-full rounded-md border border-gray-300 p-2 text-gray-900" value={selectedYear} onChange={e => setSelectedYear(e.target.value)}>
                         <option value="">Select Year</option>
                         {years.map((y: any) => <option key={y._id} value={y._id}>{y.year}</option>)}
                     </select>
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Semester</label>
-                    <select className="mt-1 block w-full rounded-md border border-gray-300 p-2" value={selectedSemester} onChange={e => setSelectedSemester(e.target.value)} disabled={!selectedYear}>
+                    <select className="mt-1 block w-full rounded-md border border-gray-300 p-2 text-gray-900" value={selectedSemester} onChange={e => setSelectedSemester(e.target.value)} disabled={!selectedYear}>
                         <option value="">Select Semester</option>
                         {filteredSemesters.map((s: any) => <option key={s._id} value={s._id}>{s.name}</option>)}
                     </select>
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Faculty</label>
-                    <select className="mt-1 block w-full rounded-md border border-gray-300 p-2" value={selectedFaculty} onChange={e => handleFacultyChange(e.target.value)} disabled={!selectedSemester}>
+                    <select className="mt-1 block w-full rounded-md border border-gray-300 p-2 text-gray-900" value={selectedFaculty} onChange={e => handleFacultyChange(e.target.value)} disabled={!selectedSemester}>
                         <option value="">Select Faculty</option>
                         {faculties.map((f: any) => <option key={f._id} value={f._id}>{f.name}</option>)}
                     </select>
                 </div>
                 <div>
                     <label className="block text-sm font-medium text-gray-700">Course</label>
-                    <select className="mt-1 block w-full rounded-md border border-gray-300 p-2" value={selectedCourse} onChange={e => handleCourseChange(e.target.value)} disabled={!selectedFaculty}>
+                    <select className="mt-1 block w-full rounded-md border border-gray-300 p-2 text-gray-900" value={selectedCourse} onChange={e => handleCourseChange(e.target.value)} disabled={!selectedFaculty}>
                         <option value="">Select Course</option>
                         {courses.map((c: any) => <option key={c._id} value={c._id}>{c.code} - {c.name}</option>)}
                     </select>
