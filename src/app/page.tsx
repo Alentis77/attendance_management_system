@@ -34,6 +34,12 @@ export default function Home() {
           >
             Get Started
           </Link>
+          <Link
+            href="/student/register"
+            className="bg-white text-indigo-600 border border-indigo-600 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-indigo-50 transition-all shadow-lg hover:shadow-xl"
+          >
+            Student Registration
+          </Link>
         </div>
       </main>
 
