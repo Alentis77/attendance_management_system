@@ -1,4 +1,6 @@
 import { getAdminStats } from '@/lib/data';
+
+export const dynamic = 'force-dynamic';
 import { Users, GraduationCap, BookOpen, Calendar } from 'lucide-react';
 
 export default async function AdminDashboard() {
